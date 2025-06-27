@@ -1,0 +1,760 @@
+<!-- Add this search bar just below the header, above the price filter section -->
+<section style
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts for Montserrat -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff7eb3;
+            --secondary: #ff75bf;
+            --bg-light: #fff6f6;
+            --bg-dark: #23242a;
+            --card-bg-light: #fff;
+            --card-bg-dark: #2d2e36;
+            --text-light: #222;
+            --text-dark: #fff;
+            --shadow-light: 0 8px 32px rgba(255, 120, 180, 0.18);
+            --shadow-dark: 0 8px 32px rgba(0,0,0,0.45);
+            --gold: #8000ff;
+        }
+        body {
+            margin: 0;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffe3e3 100%);
+            color: var(--text-light);
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: linear-gradient(135deg, #23242a 0%, #2d2e36 100%);
+            color: var(--text-dark);
+        }
+        #modeToggle {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: none;
+            border: none;
+            font-size: 1.7rem;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+        body.dark-mode #modeToggle {
+            color: var(--primary);
+            text-shadow: 0 2px 8px #ff7eb3;
+        }
+        /* Elegant Header */
+        header {
+            text-align: center;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        header h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 8px 32px rgba(255, 120, 180, 0.25), 0 2px 8px #ffd1e3;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--gold));
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #555;
+            margin-top: 0.5rem;
+            text-shadow: 0 2px 8px #a03760;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        body.dark-mode header p {
+            color: #f3eeee;
+        }
+        /* Elegant Section Styling */
+        .bag-section {
+            margin: 2.5rem auto;
+            max-width: 1100px;
+            padding: 2.5rem 1.5rem;
+            background: var(--card-bg-light);
+            border-radius: 24px;
+            box-shadow: 0 12px 48px 0 rgba(255, 120, 180, 0.22), 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 2.5rem;
+            border: 1.5px solid #ffe3f0;
+            position: relative;
+        }
+        .bag-section::before {
+            content: "";
+            position: absolute;
+            top: 18px; left: 18px; right: 18px; bottom: 18px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(255, 120, 180, 0.10);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .bag-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: left;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 16px rgba(255, 120, 180, 0.18);
+        }
+        .bag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.2rem;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+        .bag-card {
+            background: var(--card-bg-light);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 120, 180, 0.20), 0 2px 12px rgba(0,0,0,0.10);
+            padding: 1.5rem 1.2rem 2rem 1.2rem;
+            width: 270px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.25s, transform 0.22s;
+            border: 1.5px solid #ffe3f0;
+            position: relative;
+            overflow: hidden;
+        }
+        .bag-card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(255, 120, 180, 0.10);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .bag-card:hover {
+            box-shadow: 0 18px 48px rgba(255, 120, 180, 0.28), 0 6px 24px rgba(0,0,0,0.13);
+            transform: translateY(-8px) scale(1.04);
+        }
+        .bag-card img {
+            width: 210px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 24px rgba(255, 120, 180, 0.13), 0 2px 12px rgba(0,0,0,0.10);
+            background: #f8f8f8;
+            border: 2px solid #ffd1e3;
+        }
+        .bag-card h3 {
+            margin: 0.7rem 0 0.4rem 0;
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #ffd1e3;
+        }
+        .bag-card p {
+            font-size: 1.05rem;
+            color: #555;
+            margin: 0 0 0.8rem 0;
+            text-align: center;
+            font-style: italic;
+        }
+        .bag-card .price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-top: 0.3rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #ffd1e3;
+        }
+        body.dark-mode .bag-section,
+        body.dark-mode .bag-card {
+            background: var(--card-bg-dark);
+            color: var(--text-dark);
+            box-shadow: var(--shadow-dark);
+            border: 1.5px solid #444;
+        }
+        body.dark-mode .bag-section::before,
+        body.dark-mode .bag-card::after {
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.22);
+        }
+        body.dark-mode .bag-card p {
+            color: #eee;
+        }
+        body.dark-mode .bag-card img {
+            border: 2px solid #444;
+        }
+        @media (max-width: 900px) {
+            .bag-list {
+                gap: 1.2rem;
+            }
+            .bag-card {
+                width: 46vw;
+                min-width: 180px;
+                max-width: 300px;
+            }
+            .bag-card img {
+                width: 100%;
+                height: 160px;
+            }
+        }
+        @media (max-width: 600px) {
+            .bag-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .bag-card {
+                width: 90vw;
+                max-width: 340px;
+            }
+            .bag-card img {
+                height: 180px;
+            }
+        }
+        /* Login Modal Styles (unchanged) */
+        .login-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 120, 180, 0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .login-box {
+            background: var(--card-bg-light);
+            border-radius: 22px;
+            box-shadow: 0 12px 48px 0 rgba(255, 120, 180, 0.22), 0 2px 8px rgba(0,0,0,0.05);
+            padding: 2.5rem 2.2rem 2rem 2.2rem;
+            min-width: 320px;
+            max-width: 90vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8) translateY(40px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .login-box h2 {
+            margin: 0 0 1.2rem 0;
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px rgba(255, 120, 180, 0.13);
+        }
+        .login-box form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .login-box input {
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #ffd1e3;
+            font-size: 1rem;
+            outline: none;
+            background: #fff6fa;
+            transition: border 0.2s;
+        }
+        .login-box input:focus {
+            border: 1.5px solid var(--primary);
+        }
+        .login-box button[type="submit"] {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(255, 120, 180, 0.13);
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+        .login-box button[type="submit"]:hover {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        .login-box .login-error {
+            color: #e74c3c;
+            font-size: 0.98rem;
+            margin-top: 0.2rem;
+            text-align: center;
+            min-height: 1.2em;
+        }
+        .login-box #loginModeToggle {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+        body.dark-mode .login-box {
+            background: var(--card-bg-dark);
+            color: var(--text-dark);
+            box-shadow: var(--shadow-dark);
+        }
+        body.dark-mode .login-box input {
+            background: #2d2e36;
+            color: #fff;
+            border: 1px solid #444;
+        }
+        body.dark-mode .login-box input:focus {
+            border: 1.5px solid var(--primary);
+        }
+        body.dark-mode .login-box button[type="submit"] {
+            color: #fff;
+        }
+        body.dark-mode .login-box #loginModeToggle {
+            color: #fff;
+            text-shadow: 0 2px 8px #ff7eb3;
+        }
+        @media (max-width: 500px) {
+            .login-box {
+                padding: 1.3rem 0.7rem 1.2rem 0.7rem;
+                min-width: 0;
+            }
+        }
+        /* Hide main content when login is active */
+        body.login-active main,
+        body.login-active header {
+            filter: blur(6px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="login-active">
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-box">
+            <button id="loginModeToggle" title="Toggle Light/Dark Mode">🌙</button>
+            <h2>Welcome Back!</h2>
+            <form id="loginForm" autocomplete="off">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
+                <div class="login-error" id="loginError"></div>
+            </form>
+        </div>
+    </div>
+    <header>
+        <button id="modeToggle" title="Toggle Light/Dark Mode">🌙</button>
+        <h1 style="
+            color: #444;
+            font-weight: 700;
+            font-size: 3.2rem;
+            letter-spacing: 2px;
+            text-shadow:
+            0 8px 32px rgba(255,120,180,0.25),
+            0 2px 8px #ffd1e3,
+            0 4px 18px #ffd70088;
+            background: linear-gradient(90deg, #ff7eb3, #ffd700, #8000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        ">
+            bag collection
+        </h1>
+        <p style="font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #666; text-shadow: none; margin-bottom: 1.5rem; letter-spacing: 1px;">
+            Cool bags for every day and every mood.<br>
+            <span style="font-family:'Montserrat',sans-serif; font-size:1rem; color:#888; font-style:italic; letter-spacing:1px;">
+            Style, comfort, and fun – all in one place.
+            </span>
+        </p>
+        <!-- JavaScript file link -->
+        </header>
+        <main>
+        <!-- Price Range Filter (Modern Glassmorphism Style) -->
+        <section style="
+            max-width: 900px;
+            margin: 0 auto 2.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.35);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(255,120,180,0.18), 0 2px 8px #ffd1e3;
+            padding: 1.5rem 2.5rem;
+            position: relative;
+            backdrop-filter: blur(8px);
+            border: 1.5px solid #ffd70033;
+            overflow: hidden;
+            gap: 2.2rem;
+        ">
+            <div style="
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1.18rem;
+                font-weight: 600;
+                color: #ff7eb3;
+                letter-spacing: 1.2px;
+                text-shadow: 0 2px 8px #ffd1e3;
+            ">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="margin-right:4px;">
+                    <circle cx="12" cy="12" r="10" fill="#ffd700" fill-opacity="0.18"/>
+                    <path d="M8 14l4-4 4 4" stroke="#ff7eb3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span style="font-family:'Dancing Script',cursive;font-size:1.4rem;color:#0022ff;">Price Filter</span>
+            </div>
+            <div style="flex:1;max-width:340px;display:flex;align-items:center;gap:1.2rem;">
+                <input 
+                    type="range" 
+                    id="priceRange" 
+                    min="700" 
+                    max="10000" 
+                    step="100" 
+                    value="10000"
+                    style="
+                        width:100%;
+                        accent-color:#171818;
+                        background: linear-gradient(90deg, #ff7eb3 0%, #ffd700 100%);
+                        height:7px;
+                        border-radius:4px;
+                        outline:none;
+                        box-shadow:0 2px 8px #ffd1e3;
+                        cursor:pointer;
+                        transition: accent-color 0.2s;
+                    "
+                >
+                <span id="priceValue" style="
+                    font-weight:700;
+                    font-family:'Montserrat',sans-serif;
+                    color:#fff;
+                    font-size:1.08rem;
+                    background: linear-gradient(90deg, #ff7eb3 0%, #4000ff 100%);
+                    padding:0.38rem 1.1rem;
+                    border-radius:14px;
+                    box-shadow:0 2px 8px #ffd1e3;
+                    margin-left:0.2rem;
+                    letter-spacing:1px;
+                    border: 1.5px solid #ffd70055;
+                    text-shadow: 0 2px 8px #ff7eb3;
+                ">
+                    Up to <span style="color:#00a2ff;">₹10,000</span>
+                </span>
+            </div>
+        </section>
+        <script>
+        const priceRange = document.getElementById('priceRange');
+        const priceValue = document.getElementById('priceValue');
+        priceRange.addEventListener('input', function() {
+            priceValue.innerHTML = `Up to <span style="color:#ffd700;">₹${parseInt(this.value).toLocaleString()}</span>`;
+            // Filter bags by price
+            document.querySelectorAll('.bag-card').forEach(card => {
+                const price = parseInt(card.getAttribute('data-price'), 10);
+                card.style.display = price <= this.value ? '' : 'none';
+            });
+        });
+        </script>
+        <!-- Bags Sections: Left and Right Division -->
+
+        <!-- Cart Box (moved from script, now visible on main page) -->
+        <div id="cartBox"
+            style="position:fixed;bottom:24px;right:24px;background:#fff;border:2px solid #ffd700;border-radius:18px;box-shadow:0 8px 32px rgba(255,120,180,0.18);padding:1.2rem 1.5rem 1.2rem 1.5rem;z-index:9999;min-width:260px;max-width:340px;font-family:'Montserrat',sans-serif;color:#232946;">
+            <h3 style="margin:0 0 0.7rem 0;font-size:1.3rem;color:#ff7eb3;letter-spacing:1px;">🛒 My Cart</h3>
+            <div id="cartItems"></div>
+            <div style="margin-top:1rem;font-weight:700;font-size:1.1rem;">
+               Total: <span id="cartTotal" style="color:#5900ff;">₹0</span>
+            </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:center;max-width:1100px;margin:0 auto;">
+            <!-- Left Side -->
+            <div style="flex:1 1 340px;min-width:320px;max-width:500px;display:flex;flex-direction:column;gap:2rem;">
+                <!-- College Bags -->
+                <section class="bag-section" style="background:#232946;">
+                    <h2 style="color:#ffd700;font-family:'Dancing Script',cursive;font-size:2.1rem;letter-spacing:2px;">College Bags</h2>
+                    <div class="bag-list">
+                        <div class="bag-card" data-price="1299" style="background:#232946;">
+                            <img src="c:\Users\bhoomi\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\2A17CD3A45ED87C2F638AFB4917B463B\WhatsApp Image 2025-06-27 at 10.50.03_76624f31.jpg" alt="Pink College Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Pink Blossom</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Trendy, spacious and perfect for college. <span style="color:#ff7eb3;">Soft pink</span> with floral accents.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,299</div>
+                        </div>
+                        <div class="bag-card" data-price="1499" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Classic Black College Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Classic Black</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Elegant black with <span style="color:#ffd700;">gold zippers</span>. Durable and stylish for daily use.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,499</div>
+                        </div>
+                        <div class="bag-card" data-price="1199" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Blue College Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Blue Dream</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Lightweight, water-resistant and <span style="color:#7ecbff;">vibrant blue</span> for a fresh look.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,199</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- School Bags -->
+                <section class="bag-section" style="background:#232946;">
+                    <h2 style="color:#ffd700;font-family:'Dancing Script',cursive;font-size:2.1rem;letter-spacing:2px;">School Bags</h2>
+                    <div class="bag-list">
+                        <div class="bag-card" data-price="1099" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Red School Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Red Schooler</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Bright <span style="color:#ff758c;">red</span>, lightweight and sturdy for everyday school use.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,099</div>
+                        </div>
+                        <div class="bag-card" data-price="999" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Green School Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Green Buddy</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Eco-friendly, comfortable and <span style="color:#7fff7e;">stylish</span> for kids.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹999</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Kids Bags -->
+                <section class="bag-section" style="background:#232946;">
+                    <h2 style="color:#ffd700;font-family:'Dancing Script',cursive;font-size:2.1rem;letter-spacing:2px;">Kids Bags</h2>
+                    <div class="bag-list">
+                        <div class="bag-card" data-price="899" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Cartoon Kids Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Cartoon Fun</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Cute <span style="color:#ff7eb3;">cartoon prints</span>, perfect for little ones.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹899</div>
+                        </div>
+                        <div class="bag-card" data-price="799" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1526178613658-3f1622045557?auto=format&fit=crop&w=400&q=80" alt="Animal Kids Bag" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Animal Pal</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Fun <span style="color:#ffd700;">animal shapes</span>, lightweight and easy to carry.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹799</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Right Side -->
+            <div style="flex:1 1 340px;min-width:320px;max-width:500px;display:flex;flex-direction:column;gap:2rem;">
+                <!-- Handbags Section -->
+                <section class="bag-section" style="background:#232946;">
+                    <h2 style="color:#ffd700;font-family:'Dancing Script',cursive;font-size:2.1rem;letter-spacing:2px;">Handbags</h2>
+                    <div class="bag-list">
+                        <div class="bag-card" data-price="999" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Elegant pink handbag with gold accents placed on a white table in a softly lit room, giving a chic and cheerful vibe" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Elegant Pink</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Chic and compact, perfect for <span style="color:#ff7eb3;">parties</span> and outings.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹999</div>
+                        </div>
+                        <div class="bag-card" data-price="1399" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Pastel Tote" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Pastel Tote</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Spacious tote in <span style="color:#ffb3e6;">pastel shades</span>, ideal for shopping and travel.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,399</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Sling Bags Section -->
+                <section class="bag-section" style="background:#232946;">
+                    <h2 style="color:#ffd700;font-family:'Dancing Script',cursive;font-size:2.1rem;letter-spacing:2px;">Sling Bags</h2>
+                    <div class="bag-list">
+                        <div class="bag-card" data-price="799" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Mini Sling" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Mini Sling</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Lightweight, cute and easy to carry. Perfect for <span style="color:#ffd700;">essentials</span>.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹799</div>
+                        </div>
+                        <div class="bag-card" data-price="899" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Rose Gold Sling" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Rose Gold</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Trendy <span style="color:#ffd700;">rose gold</span> finish with adjustable strap.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹899</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Travel Bags Section -->
+                <section class="bag-section" style="background:#232946;">
+                    <h2 style="color:#ffd700;font-family:'Dancing Script',cursive;font-size:2.1rem;letter-spacing:2px;">Travel Bags</h2>
+                    <div class="bag-list">
+                        <div class="bag-card" data-price="1799" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Large Voyager" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Large Voyager</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Spacious, durable and perfect for <span style="color:#ff7eb3;">long trips</span>.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,799</div>
+                        </div>
+                        <div class="bag-card" data-price="1599" style="background:#232946;">
+                            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Compact Explorer" style="border:2px solid #ffd700;">
+                            <h3 style="color:#ffd700;font-family:'Montserrat',sans-serif;font-size:1.2rem;letter-spacing:1px;">Compact Explorer</h3>
+                            <p style="color:#e0e0e0;font-family:'Dancing Script',cursive;font-size:1.1rem;">Easy to carry, stylish and fits all your <span style="color:#ffd700;">essentials</span>.</p>
+                            <div class="price" style="color:#f59e42;font-family:'Montserrat',sans-serif;font-size:1.1rem;">₹1,599</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <script>
+        // Light/Dark mode toggle for main page
+        const modeToggle = document.getElementById('modeToggle');
+        const body = document.body;
+
+        function updateModeIcon() {
+            if (body.classList.contains('dark-mode')) {
+                modeToggle.textContent = '☀️';
+            } else {
+                modeToggle.textContent = '🌙';
+            }
+        }
+
+        // Wishlist heart button and cart logic
+        document.querySelectorAll('.bag-card').forEach(function(card) {
+            // Create heart button
+            const heartBtn = document.createElement('button');
+                    heartBtn.className = 'wishlist-btn';
+                    heartBtn.title = 'Add to Wishlist';
+                    heartBtn.innerHTML = '🤍';
+                    heartBtn.style.position = 'absolute';
+                    heartBtn.style.top = '14px';
+                    heartBtn.style.right = '14px';
+                    heartBtn.style.background = 'none';
+                    heartBtn.style.border = 'none';
+                    heartBtn.style.fontSize = '1.6rem';
+                    heartBtn.style.cursor = 'pointer';
+                    heartBtn.style.zIndex = '2';
+                    heartBtn.style.transition = 'transform 0.15s';
+        
+                    // Set initial heart state based on wishlist
+                    let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                    const bagTitle = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+                    const bagImg = card.querySelector('img') ? card.querySelector('img').src : '';
+                    const bagPrice = card.getAttribute('data-price');
+                    const bagObj = { title: bagTitle, img: bagImg, price: bagPrice };
+                    if (wishlist.some(item => item.title === bagTitle && item.price === bagPrice)) {
+                        heartBtn.innerHTML = '❤️';
+                    }
+        
+                    // Toggle heart fill on click
+                    heartBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                        if (heartBtn.innerHTML === '🤍') {
+                            heartBtn.innerHTML = '❤️';
+                            // Add if not already in wishlist
+                            if (!wishlist.some(item => item.title === bagTitle && item.price === bagPrice)) {
+                                wishlist.push(bagObj);
+                                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                            }
+                        } else {
+                            heartBtn.innerHTML = '🤍';
+                            // Remove from wishlist
+                            wishlist = wishlist.filter(item => !(item.title === bagTitle && item.price === bagPrice));
+                            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                        }
+                        updateCart();
+                    });
+        
+                    // Cart UI (create only once)
+                    if (!document.getElementById('cartBox')) {
+                        const cartBox = document.createElement('div');
+                        cartBox.id = 'cartBox';
+                        cartBox.style.position = 'fixed';
+                        cartBox.style.bottom = '24px';
+                        cartBox.style.right = '24px';
+                        cartBox.style.background = '#fff';
+                        cartBox.style.border = '2px solid #ffd700';
+                        cartBox.style.borderRadius = '18px';
+                        cartBox.style.boxShadow = '0 8px 32px rgba(255,120,180,0.18)';
+                        cartBox.style.padding = '1.2rem 1.5rem 1.2rem 1.5rem';
+                        cartBox.style.zIndex = '9999';
+                        cartBox.style.minWidth = '260px';
+                        cartBox.style.maxWidth = '340px';
+                        cartBox.style.fontFamily = "'Montserrat',sans-serif";
+                        cartBox.style.color = '#232946';
+                        cartBox.innerHTML = `
+                            <h3 style="margin:0 0 0.7rem 0;font-size:1.3rem;color:#ff7eb3;letter-spacing:1px;">🛒 My Cart</h3>
+                            <div id="cartItems"></div>
+                            <div style="margin-top:1rem;font-weight:700;font-size:1.1rem;">
+                                Total: <span id="cartTotal" style="color:#ffd700;">₹0</span>
+                            </div>
+                        `;
+                        document.body.appendChild(cartBox);
+                    }
+        
+                    // Cart update function (define only once)
+                    if (!window.updateCart) {
+                        window.updateCart = function() {
+                            const cartItems = document.getElementById('cartItems');
+                            const cartTotal = document.getElementById('cartTotal');
+                            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                            if (wishlist.length === 0) {
+                                cartItems.innerHTML = '<div style="color:#aaa;font-size:1rem;">No items in cart.</div>';
+                                cartTotal.textContent = '₹0';
+                                return;
+                            }
+                            let html = '';
+                            let total = 0;
+                            wishlist.forEach(item => {
+                                html += `
+                                    <div style="display:flex;align-items:center;gap:0.7rem;margin-bottom:0.6rem;">
+                                        <img src="${item.img}" alt="" style="width:38px;height:38px;object-fit:cover;border-radius:8px;border:1px solid #ffd700;">
+                                        <div style="flex:1;">
+                                            <div style="font-weight:600;font-size:1rem;color:#ff7eb3;">${item.title}</div>
+                                            <div style="font-size:0.98rem;color:#f59e42;">₹${item.price}</div>
+                                        </div>
+                                    </div>
+                                `;
+                                total += parseInt(item.price, 10);
+                            });
+                            cartItems.innerHTML = html;
+                            cartTotal.textContent = '₹' + total;
+                        };
+                    }
+        
+                    // Initial cart update
+                    updateCart();
+        
+                    card.style.position = 'relative';
+                    card.appendChild(heartBtn);
+                });
+        
+                // Light/Dark mode toggle for main page
+                modeToggle.addEventListener('click', function() {
+                    body.classList.toggle('dark-mode');
+                    updateModeIcon();
+                });
+        
+                // For login modal mode toggle
+                const loginModeToggle = document.getElementById('loginModeToggle');
+                if (loginModeToggle) {
+                    loginModeToggle.addEventListener('click', function() {
+                        body.classList.toggle('dark-mode');
+                        updateModeIcon();
+                        // Also update login modal icon
+                        if (body.classList.contains('dark-mode')) {
+                            loginModeToggle.textContent = '☀️';
+                        } else {
+                            loginModeToggle.textContent = '🌙';
+                        }
+                    });
+                }
+        
+                // Set initial icon
+                updateModeIcon();
+                // Update cart on page load
+                if (window.updateCart) updateCart();
+                </script>
+                <script src="script.js"></script>
+            </main>
+        </body>
+        </html>
+
+
+
+
+
+
+        
